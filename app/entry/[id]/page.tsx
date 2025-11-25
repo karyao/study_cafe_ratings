@@ -47,9 +47,10 @@ const blogPosts: BlogPost[] = [
   }
 ];
 
-// Sticker Component
-function Sticker({ 
-  emoji, 
+// Image Sticker Component (for PNG stickers)
+function ImageSticker({ 
+  src, 
+  alt,
   size, 
   top, 
   left, 
@@ -57,7 +58,8 @@ function Sticker({
   rotation = 0,
   delay = 0 
 }: { 
-  emoji: string; 
+  src: string;
+  alt: string;
   size: string; 
   top: string; 
   left?: string; 
@@ -67,10 +69,11 @@ function Sticker({
 }) {
   return (
     <div
-      className="sticker sticker-float"
+      className="sticker-image sticker-float"
       data-rotation={`${rotation}deg`}
       style={{
-        fontSize: size,
+        width: size,
+        height: size,
         top,
         left: left || 'auto',
         right: right || 'auto',
@@ -79,7 +82,11 @@ function Sticker({
         '--rotation': `${rotation}deg`,
       } as React.CSSProperties}
     >
-      {emoji}
+      <img 
+        src={src} 
+        alt={alt}
+        className="w-full h-full object-contain"
+      />
     </div>
   );
 }
@@ -145,15 +152,15 @@ export default async function EntryPage({
 
   return (
     <div className="min-h-screen grid-background font-sans relative">
-      {/* Background Stickers */}
-      <Sticker emoji="☕" size="3rem" top="8%" left="5%" rotation={-15} delay={0} />
-      <Sticker emoji="📚" size="2.5rem" top="12%" right="8%" rotation={20} delay={1} />
-      <Sticker emoji="✨" size="2rem" top="25%" left="3%" rotation={10} delay={2} />
-      <Sticker emoji="💝" size="2.5rem" top="35%" right="4%" rotation={-10} delay={0.5} />
-      <Sticker emoji="⭐" size="2rem" top="50%" left="2%" rotation={15} delay={1.5} />
-      <Sticker emoji="🌸" size="2.5rem" top="60%" right="6%" rotation={-20} delay={2.5} />
-      <Sticker emoji="📝" size="2rem" top="75%" left="4%" rotation={-5} delay={1} />
-      <Sticker emoji="🎨" size="2.5rem" top="85%" right="3%" rotation={25} delay={0.8} />
+      {/* Background Stickers - Using PNG images */}
+      <ImageSticker src="/stickers/beverage.png" alt="Coffee sticker" size="80px" top="8%" left="5%" rotation={-15} delay={0} />
+      <ImageSticker src="/stickers/school.png" alt="Study sticker" size="70px" top="12%" right="8%" rotation={20} delay={1} />
+      <ImageSticker src="/stickers/drink.png" alt="Bubble tea sticker" size="65px" top="25%" left="3%" rotation={10} delay={2} />
+      <ImageSticker src="/stickers/heart.png" alt="Heart sticker" size="70px" top="35%" right="4%" rotation={-10} delay={0.5} />
+      <ImageSticker src="/stickers/beverage.png" alt="Coffee sticker" size="65px" top="50%" left="2%" rotation={15} delay={1.5} />
+      <ImageSticker src="/stickers/heart.png" alt="Heart sticker" size="70px" top="60%" right="6%" rotation={-20} delay={2.5} />
+      <ImageSticker src="/stickers/school.png" alt="Study sticker" size="65px" top="75%" left="4%" rotation={-5} delay={1} />
+      <ImageSticker src="/stickers/drink.png" alt="Bubble tea sticker" size="70px" top="85%" right="3%" rotation={25} delay={0.8} />
 
       {/* Washi Tape */}
       <WashiTape 

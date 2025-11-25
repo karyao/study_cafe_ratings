@@ -49,7 +49,7 @@ function WashiTape({
   );
 }
 
-// Sticker Component
+// Sticker Component (for emojis)
 function Sticker({ 
   emoji, 
   size, 
@@ -82,6 +82,50 @@ function Sticker({
       } as React.CSSProperties}
     >
       {emoji}
+    </div>
+  );
+}
+
+// Image Sticker Component (for PNG stickers)
+function ImageSticker({ 
+  src, 
+  alt,
+  size, 
+  top, 
+  left, 
+  right,
+  rotation = 0,
+  delay = 0 
+}: { 
+  src: string;
+  alt: string;
+  size: string; 
+  top: string; 
+  left?: string; 
+  right?: string;
+  rotation?: number;
+  delay?: number;
+}) {
+  return (
+    <div
+      className="sticker-image sticker-float"
+      data-rotation={`${rotation}deg`}
+      style={{
+        width: size,
+        height: size,
+        top,
+        left: left || 'auto',
+        right: right || 'auto',
+        transform: `rotate(${rotation}deg)`,
+        animationDelay: `${delay}s`,
+        '--rotation': `${rotation}deg`,
+      } as React.CSSProperties}
+    >
+      <img 
+        src={src} 
+        alt={alt}
+        className="w-full h-full object-contain"
+      />
     </div>
   );
 }
@@ -132,15 +176,19 @@ function Rating() {
 export default function Home() {
   return (
     <div className="min-h-screen grid-background font-sans relative">
-      {/* Background Stickers */}
-      <Sticker emoji="☕" size="3rem" top="8%" left="5%" rotation={-15} delay={0} />
-      <Sticker emoji="📚" size="2.5rem" top="12%" right="8%" rotation={20} delay={1} />
-      <Sticker emoji="✨" size="2rem" top="25%" left="3%" rotation={10} delay={2} />
-      <Sticker emoji="💝" size="2.5rem" top="35%" right="4%" rotation={-10} delay={0.5} />
-      <Sticker emoji="⭐" size="2rem" top="50%" left="2%" rotation={15} delay={1.5} />
-      <Sticker emoji="🌸" size="2.5rem" top="60%" right="6%" rotation={-20} delay={2.5} />
-      <Sticker emoji="📝" size="2rem" top="75%" left="4%" rotation={-5} delay={1} />
-      <Sticker emoji="🎨" size="2.5rem" top="85%" right="3%" rotation={25} delay={0.8} />
+      {/* Background Stickers - Using PNG images */}
+      <ImageSticker src="/stickers/beverage.png" alt="Coffee sticker" size="80px" top="8%" left="5%" rotation={-15} delay={0} />
+      <ImageSticker src="/stickers/drink.png" alt="Bubble tea sticker" size="75px" top="12%" right="8%" rotation={20} delay={1} />
+      <ImageSticker src="/stickers/school.png" alt="Study sticker" size="70px" top="25%" left="3%" rotation={10} delay={2} />
+      <ImageSticker src="/stickers/heart.png" alt="Heart sticker" size="65px" top="35%" right="4%" rotation={-10} delay={0.5} />
+      <ImageSticker src="/stickers/beverage.png" alt="Coffee sticker" size="70px" top="50%" left="2%" rotation={15} delay={1.5} />
+      <ImageSticker src="/stickers/drink.png" alt="Bubble tea sticker" size="75px" top="60%" right="6%" rotation={-20} delay={2.5} />
+      <ImageSticker src="/stickers/school.png" alt="Study sticker" size="65px" top="75%" left="4%" rotation={-5} delay={1} />
+      <ImageSticker src="/stickers/heart.png" alt="Heart sticker" size="70px" top="85%" right="3%" rotation={25} delay={0.8} />
+      <ImageSticker src="/stickers/beverage.png" alt="Coffee sticker" size="60px" top="20%" right="15%" rotation={12} delay={1.2} />
+      <ImageSticker src="/stickers/drink.png" alt="Bubble tea sticker" size="65px" top="40%" left="12%" rotation={-18} delay={2.2} />
+      <ImageSticker src="/stickers/school.png" alt="Study sticker" size="70px" top="65%" right="12%" rotation={8} delay={0.3} />
+      <ImageSticker src="/stickers/heart.png" alt="Heart sticker" size="60px" top="90%" left="8%" rotation={-12} delay={1.8} />
 
 
       <main className="min-h-screen w-full max-w-6xl mx-auto px-8 py-16 relative z-10">
